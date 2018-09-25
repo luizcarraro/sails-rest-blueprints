@@ -1,0 +1,48 @@
+{
+  "name": "sails-rest-blueprints",
+  "version": "0.0.0",
+  "description": "RestFULL / Ember Data Rest Adapter blueprints for Sails projects.",
+  "originalAuthor": {
+    "name": "Luiz Carraro",
+    "email": "lacarraro@gmail.com"
+  },
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "mocha --opts tests/mocha.opts tests/dummy/main.test.js tests/**/*.test.js"
+  },
+  "eslintIgnore": [
+    "tests/dummy/*"
+  ],
+  "homepage": "https://github.com/luizcarraro/sails-rest-blueprints",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/luizcarraro/sails-rest-blueprints.git"
+  },
+  "bugs": {
+    "url": "http://github.com/luizcarraro/sails-rest-blueprints/issues",
+    "email": "luizcarraro@me.com"
+  },
+  "keywords": [
+    "sails",
+    "ember",
+    "rest",
+    "blueprint"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.17.11",
+    "merge-defaults": "^0.2.1",
+    "pluralize": "^1.1.0",
+    "sails-hook-custom-blueprints": "^1.0.0",
+    "supertest": "^3.3.0"
+  },
+  "devDependencies": {
+    "glob": "^7.1.2",
+    "mocha": "^5.2.0",
+    "mocha-clean": "^1.0.0",
+    "mocha-eslint": "^4.1.0",
+    "sails": "^1.0.2",
+    "sails-generate": "1.15.28",
+    "should": "^13.2.3"
+  }
+}
