@@ -1,7 +1,6 @@
 const should = require('should');
-const request = require('supertest');
 
-describe('Installation test', () => {
+describe('After Installation ', () => {
 
   describe('when lifting sails', () => {
 
@@ -10,6 +9,5 @@ describe('Installation test', () => {
       should.exist(sails);
       done();
     });
-
   });
 });

@@ -54,7 +54,7 @@ module.exports = function updateOneRecord( req, res ) {
     if ( err ) return res.serverError( err );
     if ( !matchingRecord ) return res.notFound();
 
-    Model.update( pk, values ).exec( function updated( err, records ) {
+    Model.update( pk, values ).fetch().exec( function updated( err, records ) {
 
       // Differentiate between waterline-originated validation errors
       // and serious underlying issues. Respond with badRequest if a

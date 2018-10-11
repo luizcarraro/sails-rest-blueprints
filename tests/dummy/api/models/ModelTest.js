@@ -8,6 +8,12 @@
 module.exports = {
 
   attributes: {
+    field1: {
+      type: 'string'
+    },
+    field2: {
+      type: 'string'
+    }
 
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗

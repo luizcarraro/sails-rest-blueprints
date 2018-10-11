@@ -4,6 +4,7 @@
  */
 var util = require( 'util' );
 var actionUtil = require('./_util/basicActionUtil.js');
+const _ = require('lodash');
 
 /**
  * Enable sideloading. Edit config/blueprints.js and add:
@@ -41,7 +42,7 @@ module.exports = function findOneRecord( req, res ) {
   sails.log.silly(`[findOne Blueprint] pk: ${pk}`);
   sails.log.silly(`[findOne Blueprint] criteria:`, criteria);
 
-  var query = Model.findOne( pk ).where( criteria ).meta({skipRecordVerification: true});
+  var query = Model.findOne( _.extend({id: pk}, criteria) ).meta({skipRecordVerification: true});
 
 
   // if(Model.populateFindOne) {

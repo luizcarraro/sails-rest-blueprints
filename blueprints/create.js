@@ -1,8 +1,12 @@
 /**
  * Module dependencies
  */
-var util = require( 'util' ),
-  actionUtil = require( './_util/basicActionUtil' );
+var util = require( 'util' );
+var actionUtil = require( './_util/basicActionUtil' );
+
+const {
+  parseValues
+} = require('./_util/unifiedActionUtil');
 
 /**
  * Create Record
@@ -18,9 +22,8 @@ var util = require( 'util' ),
  * @param {*} * - other params will be used as `values` in the create
  */
 module.exports = function createRecord( req, res ) {
-
   var Model = actionUtil.parseModel( req );
-  var data = actionUtil.parseValues( req, Model );
+  var data = parseValues( req, Model );
 
   /* if ( req.user && req.user.id ) {
     sails.log.debug( 'Injecting req.user into blueprint create -> data.' );
@@ -29,9 +32,9 @@ module.exports = function createRecord( req, res ) {
     // exception for creating new users, otherwise any creative act needs a logged in user
     if ( Model.identity !== 'user' ) return res.forbidden( "Create blueprint needs an authenticated user!" );
   } */
-
+  
   // Create new instance of model using data from params
-  Model.create( data ).exec( function created( err, newInstance ) {
+  Model.create( data ).fetch().exec( function created( err, newInstance ) {
 
     // Differentiate between waterline-originated validation errors
     // and serious underlying issues. Respond with badRequest if a
@@ -68,8 +71,7 @@ module.exports = function createRecord( req, res ) {
       // Send JSONP-friendly response if it's supported
       // (HTTP 201: Created)
       res.status( 201 );
-      res.json( actionUtil.emberizeJSON( Model, populatedRecord, req.options.associations, true ) );
-
+      return res.json( actionUtil.emberizeJSON( Model, populatedRecord, req.options.associations, true ) );
     } );
   } );
 };

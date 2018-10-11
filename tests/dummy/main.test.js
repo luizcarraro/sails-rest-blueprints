@@ -1,3 +1,4 @@
+global.__base = __dirname;
 const Sails = require('sails');
 global._ = require('lodash');
 
@@ -9,7 +10,7 @@ before(function (callback) {
   let configs = {
     requireAccountActivation: false,
     log: {
-      level: 'silent'
+      level: 'info'
     },
     port: 1337,
     environment: 'test',
@@ -26,7 +27,7 @@ before(function (callback) {
     if (err) {
       return callback(err);
     }
-    console.log('Sails lifted for tests!');
+    sails.log.debug('Sails lifted for tests!');
     callback(null, sails);
   });
 });

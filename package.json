@@ -11,7 +11,7 @@
     "test": "mocha --opts tests/mocha.opts tests/dummy/main.test.js tests/**/*.test.js"
   },
   "eslintIgnore": [
-    "tests/dummy/*"
+    "test/dummy/*"
   ],
   "homepage": "https://github.com/luizcarraro/sails-rest-blueprints",
   "repository": {

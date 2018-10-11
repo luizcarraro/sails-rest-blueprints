@@ -2,3 +2,4 @@
 --colors
 --timeout 10000
 --require mocha-clean
+--file tests/dummy/main.test.js

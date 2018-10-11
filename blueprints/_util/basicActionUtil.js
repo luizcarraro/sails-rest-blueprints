@@ -7,7 +7,6 @@ var uniq          = _.uniq;
 var includes      = _.includes;
 var isArray       = _.isArray;
 var isString      = _.isString;
-var isPlainObject = _.isPlainObject;
 var isObject      = _.isObject;
 var isUndefined   = _.isUndefined;
 var create        = _.create;
@@ -22,12 +21,17 @@ var pluralize = require('pluralize');
 // blueprints are concerned (for now.)
 var JSONP_CALLBACK_PARAM = 'callback';
 
+const {
+  parsePk
+} = require('./unifiedActionUtil');
+
 /**
  * Utility methods used in built-in blueprint actions.
  *
  * @type {Object}
  */
-module.exports = {
+
+const BasicActionUtil = {
 
   /**
    * Prepare records and populated associations to be consumed by Ember's DS.RESTAdapter
@@ -211,35 +215,14 @@ module.exports = {
   },
 
   /**
-   * Parse primary key value for use in a Waterline criteria
-   * (e.g. for `find`, `update`, or `destroy`)
-   *
-   * @param  {Request} req
-   * @return {Integer|String}
-   */
-  parsePk: function ( req ) {
-
-    var pk = req.options.id || ( req.options.where && req.options.where.id ) || req.param( 'id' );
-
-    // TODO: make this smarter...
-    // (e.g. look for actual primary key of model and look for it
-    //  in the absence of `id`.)
-    // See coercePK for reference (although be aware it is not currently in use)
-
-    // exclude criteria on id field
-    pk = isPlainObject( pk ) ? undefined : pk;
-    return pk;
-  },
-
-  /**
    * Parse primary key value from parameters.
    * Throw an error if it cannot be retrieved.
    *
    * @param  {Request} req
    * @return {Integer|String}
    */
-  requirePk: function ( req ) {
-    var pk = module.exports.parsePk( req );
+  requirePk( req ) {
+    var pk = parsePk( req );
 
     // Validate the required `id` parameter
     if ( !pk ) {
@@ -253,7 +236,6 @@ module.exports = {
       err.status = 400;
       throw err;
     }
-
     return pk;
   },
 
@@ -431,3 +413,5 @@ function tryToParseJSON( json ) {
     return e;
   }
 }
+
+module.exports = BasicActionUtil;
