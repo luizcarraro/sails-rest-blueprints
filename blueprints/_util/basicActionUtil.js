@@ -3,8 +3,6 @@
  */
 
 var _ = require( 'lodash' );
-var uniq          = _.uniq;
-var includes      = _.includes;
 var isArray       = _.isArray;
 var isString      = _.isString;
 var isObject      = _.isObject;
@@ -12,7 +10,6 @@ var isUndefined   = _.isUndefined;
 var create        = _.create;
 var omit          = _.omit;
 var merge         = _.merge;
-var camelCase     = _.camelCase;
 
 var util      = require('util');
 var pluralize = require('pluralize');
@@ -48,8 +45,8 @@ const BasicActionUtil = {
     var documentIdentifier = plural ? pluralize( model.globalId ) : model.globalId;
     console.log('documentIdentifier', documentIdentifier)
     //turn id into camelCase for ember
-    documentIdentifier = camelCase(documentIdentifier);
-    console.log('camelCase(documentIdentifier)', documentIdentifier)
+    documentIdentifier = _.camelCase(documentIdentifier);
+    console.log('_.camelCase(documentIdentifier)', documentIdentifier)
     console.log('plural', plural);
 
     var json = {};
@@ -62,9 +59,9 @@ const BasicActionUtil = {
       _.forEach( associations, function ( assoc ) {
         var assocName;
         if (assoc.type === 'collection') {
-          assocName = pluralize(camelCase(sails.models[assoc.collection].globalId));
+          assocName = pluralize(_.camelCase(sails.models[assoc.collection].globalId));
         } else {
-          assocName = pluralize(camelCase(sails.models[assoc.model].globalId));
+          assocName = pluralize(_.camelCase(sails.models[assoc.model].globalId));
         }
 
         // initialize jsoning object
@@ -81,9 +78,9 @@ const BasicActionUtil = {
       _.forEach( associations, function ( assoc ) {
         var assocName;
         if (assoc.type === 'collection') {
-          assocName = pluralize(camelCase(sails.models[assoc.collection].globalId));
+          assocName = pluralize(_.camelCase(sails.models[assoc.collection].globalId));
         } else {
-          assocName = pluralize(camelCase(sails.models[assoc.model].globalId));
+          assocName = pluralize(_.camelCase(sails.models[assoc.model].globalId));
         }
 
         if ( assoc.type === "collection" && record[ assoc.alias ] && record[ assoc.alias ].length > 0 ) {
@@ -115,7 +112,7 @@ const BasicActionUtil = {
       // filter duplicates in sideloaded records
       _.forEach( json, function ( array, key ) {
         if ( !plural && key === documentIdentifier ) return;
-        json[ key ] = uniq( array, function ( record ) {
+        json[key] = _.uniq(array, function (record) {
           return record.id;
         } );
       } );
@@ -153,7 +150,7 @@ const BasicActionUtil = {
 
       // If an alias filter was provided, override the blueprint config.
       if ( aliasFilter ) {
-        shouldPopulate = includes( aliasFilter, association.alias );
+        shouldPopulate = _.includes(aliasFilter, association.alias);
       }
       // console.log('aliasFilter: ',aliasFilter, 'Should populate? ', shouldPopulate)
 
@@ -326,7 +323,7 @@ const BasicActionUtil = {
     }
 
     // Get values using the model identity as resource identifier
-    var values = req.param( camelCase(model.globalId) ) || {};
+    var values = req.param(_.camelCase(model.globalId)) || {};
 
     // Omit built-in runtime config (like query modifiers)
     values = omit( values, blacklist || [] );

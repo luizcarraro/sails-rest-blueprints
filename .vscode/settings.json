@@ -1,2 +1,10 @@
 {
+  "mochaExplorer.optsFile": "test/mocha.opts",
+  "mochaExplorer.files": "test/**/*.test.js",    
+  // "mochaExplorer.mochaPath": "node_modules/mocha",
+  // "mochaExplorer.nodePath": null,
+  "mochaExplorer.require": [
+    "babel-register",
+  ],
+  "mochaExplorer.logpanel":true
 }

@@ -8,7 +8,7 @@
   },
   "main": "lib/index.js",
   "scripts": {
-    "test": "mocha --opts tests/mocha.opts tests/dummy/main.test.js tests/**/*.test.js"
+    "test": "mocha --opts tests/mocha.opts tests/dummy/testDummy.js tests/**/*.test.js"
   },
   "eslintIgnore": [
     "test/dummy/*"
@@ -37,12 +37,14 @@
     "supertest": "^3.3.0"
   },
   "devDependencies": {
+    "babel-register": "^6.26.0",
     "glob": "^7.1.2",
     "mocha": "^5.2.0",
     "mocha-clean": "^1.0.0",
     "mocha-eslint": "^4.1.0",
     "sails": "^1.0.2",
     "sails-generate": "1.15.28",
-    "should": "^13.2.3"
+    "should": "^13.2.3",
+    "test-machinepack-mocha": "^3.0.0"
   }
 }

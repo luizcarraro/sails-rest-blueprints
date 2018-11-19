@@ -3,8 +3,10 @@ const Sails = require('sails');
 global._ = require('lodash');
 
 process.chdir(__dirname);
+console.log('LOAD MAIN CONFIG at: ', process.cwd());
 
 before(function (callback) {
+  console.log('BEFORE');
   this.timeout(50000);
 
   let configs = {

@@ -31,7 +31,6 @@ describe('# FIND Blueprint ', () => {
 
     it('should contain \'model-tests\' property as an array', () => {
       responseBody['model-tests'].should.be.instanceof(Array);
-
     });
 
     it('should have a \'meta\' property', () => {
